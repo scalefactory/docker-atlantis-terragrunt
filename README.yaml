@@ -1,0 +1,60 @@
+---
+# This file is used by `mdctl`. Run `mdctl build` to build a README file.
+
+# Name of this project
+name: docker-atlantis-terragrunt
+
+# The short subtitle for this project
+subtitle: |-
+  A Docker image for running Atlantis with Terragrunt
+
+# Badges to display
+badges:
+  - name: License
+    image: https://img.shields.io/github/license/scalefactory/docker-atlantis-terragrunt.svg
+    url: https://github.com/scalefactory/docker-atlantis-terragrunt
+
+# References to display
+references:
+  - name: Atlantis
+    url: https://www.runatlantis.io/
+  - name: Terragrunt
+    url: https://github.com/gruntwork-io/terragrunt
+  - name: Atlantis Terraform module
+    url: https://github.com/terraform-aws-modules/terraform-aws-atlantis
+  - name: Report a bug
+    url: https://github.com/scalefactory/docker-atlantis-terragrunt/issues
+
+# Bulleted features to display
+features:
+  - "Docker image to run Terragrunt with Atlantis"
+  - "SSH key support to access private repositories"
+
+# Guide to use this project
+quickstart: |-
+  Deploy the reference [Atlantis Terraform module](https://github.com/terraform-aws-modules/terraform-aws-atlantis)
+
+  Tweak the `custom_environments_secret_secrets` and `atlantis_image` variables. Put your private SSH key into AWS secrets manager under the `/atlantis/github/user/private_ssh_key` path
+
+  ```
+  # terraform-aws-modules/terraform-aws-atlantis
+  ...
+  custom_environment_secrets = [
+    {
+      name  = "GITHUB_USER_SSH_KEY"
+      valueFrom = "/atlantis/github/user/private_ssh_key"
+    }
+  ]
+  atlantis_image             = "scalefactory/docker-atlantis-terragrunt:v0.19.20"
+  ...
+  ```
+
+  *Note:* You will need to grant the Fargate task permission to read the secret above.
+
+# Open source license for this project
+license: MIT
+
+# Contributors to this project
+contributors:
+  - name: "Steve Porter"
+    github: "steveporter92"

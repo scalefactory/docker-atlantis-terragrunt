@@ -1,0 +1,59 @@
+<!-- This file is used by `mdctl`. Make all changes to `README.yaml` and run `mdctl build` to rebuild this file. -->
+{{ if .banner }}
+<p align="center">
+
+{{ printf "![%s](%s)" .banner.name .banner.url }}
+
+</p>
+{{ end }}
+
+{{ if .name }}
+<h1 align="center">{{ .name }}</h1>
+{{ end }}
+
+{{ if .subtitle }}
+<h4 align="center">{{ .subtitle }}</h4>
+{{ end }}
+
+{{ if .badges }}
+<p align="center">
+
+{{ range $badge := .badges }}{{ printf "[![%s](%s)](%s) " $badge.name $badge.image $badge.url }}{{ end }}
+
+</p>
+{{ end }}
+
+{{ if .references }}
+<p align="center">
+{{ range $i, $reference := .references }} <a href="{{ $reference.url}}" target="_blank">{{$reference.name}}</a>{{ if last $i $reference | not }}  •{{end}}
+{{- end }}
+</p>
+{{ end }}
+
+{{ if .features }}
+## :sparkles: Features
+{{ range $feature := .features }}{{printf "- %s\n" $feature}}{{ end }}
+{{ end }}
+
+{{ if .quickstart }}
+## :bulb: Quick Start
+{{ .quickstart -}}
+{{ end }}
+
+{{ if .license }}
+## :page_facing_up: License
+{{.name}} is an open-sourced software licensed under the [{{.license}} license](LICENSE.md).
+{{ end }}
+
+{{ if .contributors }}
+## :star: Contributors
+
+| {{ range $contributor := .contributors }}{{ printf " [![%s][%s_avatar]][%s_homepage]<br/>[%s][%s_homepage] |" $contributor.name $contributor.github $contributor.github $contributor.name $contributor.github}}{{ end }}
+|{{- range $contributor := .contributors -}}---|{{ end }}
+
+{{ range $contributor := .contributors -}}
+
+{{ printf "  [%s_homepage]: https://github.com/%s" $contributor.github $contributor.github }}
+{{ printf "  [%s_avatar]: https://github.com/%s.png?size=150" $contributor.github $contributor.github }}
+{{ end }}
+{{ end }}

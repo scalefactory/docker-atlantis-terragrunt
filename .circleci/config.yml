@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker-publisher:
     environment:
-      IMAGE_NAME: steveporter92/docker-atlantis-terragrunt
+      IMAGE_NAME: scalefactory/docker-atlantis-terragrunt
     docker:
       - image: circleci/buildpack-deps:xenial
 jobs:
