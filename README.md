@@ -1,5 +1,11 @@
 <!-- This file is used by `mdctl`. Make all changes to `README.yaml` and run `mdctl build` to rebuild this file. -->
 
+<p align="center">
+
+![Screenshot of example Terraform](./docs/banner.png)
+
+</p>
+
 
 
 <h1 align="center">docker-atlantis-terragrunt</h1>
@@ -18,12 +24,6 @@
 
 
 
-<p align="center">
- <a href="https://www.runatlantis.io/" target="_blank">Atlantis</a>  • <a href="https://github.com/gruntwork-io/terragrunt" target="_blank">Terragrunt</a> <a href="https://github.com/terraform-aws-modules/terraform-aws-atlantis" target="_blank">Atlantis Terraform module</a>  • <a href="https://github.com/scalefactory/docker-atlantis-terragrunt/issues" target="_blank">Report a bug</a>  •
-</p>
-
-
-
 ## :sparkles: Features
 - Docker image to run Terragrunt with Atlantis
 - SSH key support to access private repositories
@@ -32,9 +32,14 @@
 
 
 ## :bulb: Quick Start
-Deploy the reference [Atlantis Terraform module](https://github.com/terraform-aws-modules/terraform-aws-atlantis)
+You can find example terraform in the `examples` folder.
 
-Tweak the `custom_environments_secret_secrets` and `atlantis_image` variables. Put your private SSH key into AWS secrets manager under the `/atlantis/github/user/private_ssh_key` path
+Deploy the reference
+[Atlantis Terraform module](https://github.com/terraform-aws-modules/terraform-aws-atlantis)
+
+Tweak the `custom_environments_secret_secrets` and `atlantis_image` variables.
+Put your private SSH key into AWS secrets manager under the
+`/atlantis/github/user/private_ssh_key` path
 
 ```
 # terraform-aws-modules/terraform-aws-atlantis
@@ -45,15 +50,44 @@ custom_environment_secrets = [
     valueFrom = "/atlantis/github/user/private_ssh_key"
   }
 ]
-atlantis_image             = "scalefactory/docker-atlantis-terragrunt:v0.19.20"
+atlantis_image = "scalefactory/docker-atlantis-terragrunt:v0.19.20"
 ...
 ```
 
-*Note:* You will need to grant the Fargate task permission to read the secret above.
+*Note:* You will need to grant the Fargate task permission to read the secret
+above.
+
+
+## :page_facing_up: Examples
+Copy the Terraform in the examples folder.
+
+We recommend creating a dedicated bot GitHub account to run atlantis as. Put a
+valid [GitHub personal access
+token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token)
+for this user into secrets manager with the key `token`. Note down the ARN for
+this secret, you will need it later.
+
+Set the following Terraform variables
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| github_secret_token_arn | The arn of the github token in Secrets Manager  | string | `` | yes |
+| github_user | The name of the github user Atlantis will run as (@sfatlantisbot). | string | `` | yes |
+| domain | The domain to run atlantis under (example.com).  | string | `` | yes |
+
 
 
 ## :page_facing_up: License
 docker-atlantis-terragrunt is an open-sourced software licensed under the [MIT license](LICENSE.md).
+
+
+
+## :blue_book: References
+
+- [Atlantis](https://www.runatlantis.io/)
+- [Terragrunt](https://github.com/gruntwork-io/terragrunt)
+- [Atlantis Terraform module](https://github.com/terraform-aws-modules/terraform-aws-atlantis)
+- [Report a bug](https://github.com/scalefactory/docker-atlantis-terragrunt/issues)
 
 
 

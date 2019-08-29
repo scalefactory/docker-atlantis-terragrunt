@@ -4,6 +4,11 @@
 # Name of this project
 name: docker-atlantis-terragrunt
 
+# Banner
+banner:
+  name: Screenshot of example Terraform
+  url: ./docs/banner.png
+
 # The short subtitle for this project
 subtitle: |-
   A Docker image for running Atlantis with Terragrunt
@@ -32,9 +37,14 @@ features:
 
 # Guide to use this project
 quickstart: |-
-  Deploy the reference [Atlantis Terraform module](https://github.com/terraform-aws-modules/terraform-aws-atlantis)
+  You can find example terraform in the `examples` folder.
 
-  Tweak the `custom_environments_secret_secrets` and `atlantis_image` variables. Put your private SSH key into AWS secrets manager under the `/atlantis/github/user/private_ssh_key` path
+  Deploy the reference
+  [Atlantis Terraform module](https://github.com/terraform-aws-modules/terraform-aws-atlantis)
+
+  Tweak the `custom_environments_secret_secrets` and `atlantis_image` variables.
+  Put your private SSH key into AWS secrets manager under the
+  `/atlantis/github/user/private_ssh_key` path
 
   ```
   # terraform-aws-modules/terraform-aws-atlantis
@@ -45,11 +55,29 @@ quickstart: |-
       valueFrom = "/atlantis/github/user/private_ssh_key"
     }
   ]
-  atlantis_image             = "scalefactory/docker-atlantis-terragrunt:v0.19.20"
+  atlantis_image = "scalefactory/docker-atlantis-terragrunt:v0.19.20"
   ...
   ```
 
-  *Note:* You will need to grant the Fargate task permission to read the secret above.
+  *Note:* You will need to grant the Fargate task permission to read the secret
+  above.
+
+examples: |
+  Copy the Terraform in the examples folder.
+
+  We recommend creating a dedicated bot GitHub account to run atlantis as. Put a
+  valid [GitHub personal access
+  token](https://www.runatlantis.io/docs/access-credentials.html#generating-an-access-token)
+  for this user into secrets manager with the key `token`. Note down the ARN for
+  this secret, you will need it later.
+
+  Set the following Terraform variables
+
+  | Name | Description | Type | Default | Required |
+  |------|-------------|:----:|:-----:|:-----:|
+  | github_secret_token_arn | The arn of the github token in Secrets Manager  | string | `` | yes |
+  | github_user | The name of the github user Atlantis will run as (@sfatlantisbot). | string | `` | yes |
+  | domain | The domain to run atlantis under (example.com).  | string | `` | yes |
 
 # Open source license for this project
 license: MIT

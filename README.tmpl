@@ -23,13 +23,6 @@
 </p>
 {{ end }}
 
-{{ if .references }}
-<p align="center">
-{{ range $i, $reference := .references }} <a href="{{ $reference.url}}" target="_blank">{{$reference.name}}</a>{{ if last $i $reference | not }}  •{{end}}
-{{- end }}
-</p>
-{{ end }}
-
 {{ if .features }}
 ## :sparkles: Features
 {{ range $feature := .features }}{{printf "- %s\n" $feature}}{{ end }}
@@ -38,6 +31,18 @@
 {{ if .quickstart }}
 ## :bulb: Quick Start
 {{ .quickstart -}}
+{{ end }}
+
+{{ if .examples }}
+## :page_facing_up: Examples
+{{ .examples -}}
+{{ end }}
+
+{{ if .references }}
+## :blue_book: References
+{{ range $i, $reference := .references }}
+- [{{$reference.name}}]({{$reference.url}})
+{{- end }}
 {{ end }}
 
 {{ if .license }}
