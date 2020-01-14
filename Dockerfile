@@ -1,6 +1,6 @@
-FROM runatlantis/atlantis:v0.9.0
+FROM runatlantis/atlantis:v0.10.2
 
-ARG TERRAGRUNT_VERSION=v0.19.26
+ARG TERRAGRUNT_VERSION=v0.21.11
 ENV TERRAGRUNT_VERSION=$TERRAGRUNT_VERSION
 
 # Download Terragrunt
